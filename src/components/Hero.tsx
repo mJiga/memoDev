@@ -8,8 +8,8 @@ import {
   FaNodeJs,
   FaJava,
   FaGitAlt,
-  // FaGithub,
-  // FaLinkedin,
+  FaGithub,
+  FaLinkedin,
 } from "react-icons/fa";
 import {
   SiMongodb,
@@ -99,10 +99,28 @@ function Hero() {
             <img
               src={pfp}
               alt="Profile"
-              className="rounded-full w-64 h-64 md:w-96 md:h-96 ml-10 object-cover"
+              className="rounded-full w-64 h-64 md:w-96 md:h-96 object-cover"
             />
-            <div className="ml-10 absolute inset-0 rounded-full border-4 border-white"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-white"></div>
           </a>
+          <div className="flex flex-col gap-4 mt-4">
+            <a
+              href="https://github.com/mJiga"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-transform duration-300 ease-in-out transform hover:scale-110 hover:text-gray-500"
+            >
+              <FaGithub className="text-3xl mb-2 " />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/guillermojiga"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-transform duration-300 ease-in-out transform hover:scale-110 hover:text-blue-500"
+            >
+              <FaLinkedin className="text-3xl mb-2 " />
+            </a>
+          </div>
         </div>
       </div>
       <div className="flex gap-2 mt-4 text-4xl" title="MERN stack">
