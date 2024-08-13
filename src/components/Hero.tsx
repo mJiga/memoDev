@@ -2,6 +2,25 @@ import { Link } from "react-router-dom";
 import pfp from "../assets/pfp.jpg";
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
 import { MultiPhraseTypewriter } from "./ui/MultiPhraseTypewriter";
+
+import {
+  FaReact,
+  FaNodeJs,
+  FaJava,
+  FaGitAlt,
+  // FaGithub,
+  // FaLinkedin,
+} from "react-icons/fa";
+import {
+  SiMongodb,
+  SiTypescript,
+  SiJavascript,
+  SiPython,
+  SiExpress,
+  SiTailwindcss,
+  SiFirebase,
+} from "react-icons/si";
+
 import Jimenez_Guillermo_OfficialResume from "../assets/Jimenez_Guillermo_OfficialResume.pdf";
 
 function Hero() {
@@ -47,9 +66,9 @@ function Hero() {
                 I'm Guillermo Jimenez - Memo!
               </span>
             </h2>
-            <h3 className="font-light text-sm md:text-base mb-6 max-w-lg">
-              Passionate Full-Stack Developer by night and a concert pianist by
-              day | Based in El Paso, Texas. 📍
+            <h3 className="text-sm md:text-base mb-6 max-w-lg">
+              Passionate Full-Stack Developer Student by night and concert
+              pianist by day | Based in El Paso, Texas. 📍
             </h3>
             <div className="flex justify-center items-center ml-20 gap-4">
               <HoverBorderGradient
@@ -76,14 +95,31 @@ function Hero() {
             </div>
           </div>
 
-          <div className="flex-shrink-0">
+          <a className="relative flex-shrink-0">
             <img
               src={pfp}
               alt="Profile"
               className="rounded-full w-64 h-64 md:w-96 md:h-96 ml-10 object-cover"
             />
-          </div>
+            <div className="ml-10 absolute inset-0 rounded-full border-4 border-white"></div>
+          </a>
         </div>
+      </div>
+      <div className="flex gap-2 mt-4 text-4xl" title="MERN stack">
+        <span className="mt-3 text-lg">Tech Stack |</span>
+        <SiMongodb className="mt-2" title="MongoDB" />
+        <SiExpress className="mt-2" title="Express" />
+        <FaReact className="mt-2" title="React" />
+        <FaNodeJs className="mt-2" title="Node.js" />
+        <SiFirebase className="mt-2" title="Firebase.js" />
+
+        <SiTypescript className="ml-6 mt-2" title="TypeScript" />
+        <SiJavascript className="mt-2" title="JavaScript" />
+        <SiTailwindcss className="mr-6 mt-2" title="Tailwind CSS" />
+
+        <SiPython className="mt-2" title="Python" />
+        <FaJava className="mr-6 mt-2" title="Java" />
+        <FaGitAlt className="mt-2" title="Git" />
       </div>
     </div>
   );
