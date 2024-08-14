@@ -22,6 +22,7 @@ import {
 } from "react-icons/si";
 
 import Jimenez_Guillermo_OfficialResume from "../assets/Jimenez_Guillermo_OfficialResume.pdf";
+import { motion } from "framer-motion";
 
 function Hero() {
   const phrases = [
@@ -47,7 +48,12 @@ function Hero() {
     <div className="py-12">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="flex flex-col items-start max-w-5xl flex-grow">
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9 }}
+            className="flex flex-col items-start max-w-5xl flex-grow"
+          >
             <div className="relative flex flex-col h-[150px] md:h-[180px] mb-6">
               <div className="absolute inset-0 flex items-center">
                 <MultiPhraseTypewriter
@@ -93,24 +99,34 @@ function Hero() {
                 </button>
               </a>
             </div>
-          </div>
+          </motion.div>
 
-          <a className="relative flex-shrink-0">
+          <motion.a
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9 }}
+            className="relative flex-shrink-0 ml-8"
+          >
             <img
               src={pfp}
               alt="Profile"
               className="rounded-full w-64 h-64 md:w-96 md:h-96 object-cover"
             />
             <div className="absolute inset-0 rounded-full border-4 border-white"></div>
-          </a>
-          <div className="flex flex-col gap-4 mt-4">
+          </motion.a>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="flex flex-col gap-4 mt-4"
+          >
             <a
               href="https://github.com/mJiga"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-transform duration-300 ease-in-out transform hover:scale-110 hover:text-gray-500"
             >
-              <FaGithub className="text-3xl mb-2 " />
+              <FaGithub className="text-3xl mb-2" />
             </a>
             <a
               href="https://www.linkedin.com/in/guillermojiga"
@@ -118,12 +134,18 @@ function Hero() {
               rel="noopener noreferrer"
               className="transition-transform duration-300 ease-in-out transform hover:scale-110 hover:text-blue-500"
             >
-              <FaLinkedin className="text-3xl mb-2 " />
+              <FaLinkedin className="text-3xl mb-2" />
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
-      <div className="flex gap-2 mt-4 text-4xl" title="MERN stack">
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.4 }}
+        className="flex gap-2 mt-4 text-4xl "
+        title="MERN stack"
+      >
         <span className="mt-3 text-lg">Tech Stack |</span>
         <SiMongodb className="mt-2" title="MongoDB" />
         <SiExpress className="mt-2" title="Express" />
@@ -138,7 +160,7 @@ function Hero() {
         <SiPython className="mt-2" title="Python" />
         <FaJava className="mr-6 mt-2" title="Java" />
         <FaGitAlt className="mt-2" title="Git" />
-      </div>
+      </motion.div>
     </div>
   );
 }
