@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { cn } from "../../utils/cn";
 import { motion } from "framer-motion";
@@ -29,19 +27,19 @@ export const MultiPhraseTypewriter = ({
       if (currentText.length < currentPhrase.length) {
         timer = setTimeout(() => {
           setCurrentText(currentPhrase.slice(0, currentText.length + 1));
-        }, 100); // Typing speed
+        }, 100);
       } else {
         setIsPaused(true);
         timer = setTimeout(() => {
           setIsPaused(false);
           setIsTyping(false);
-        }, 2000); // Pause for 2 seconds when word is fully typed
+        }, 2000);
       }
     } else if (!isPaused) {
       if (currentText.length > 0) {
         timer = setTimeout(() => {
           setCurrentText(currentText.slice(0, -1));
-        }, 50); // Erasing speed
+        }, 50);
       } else {
         setCurrentPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
         setIsTyping(true);
@@ -58,7 +56,7 @@ export const MultiPhraseTypewriter = ({
           <span
             key={`char-${index}`}
             className={cn(
-              `dark:text-white text-black`,
+              "text-primary",
               phrases[currentPhraseIndex].className
             )}
           >
@@ -72,7 +70,7 @@ export const MultiPhraseTypewriter = ({
   return (
     <div className={cn("flex space-x-1 my-6", className)}>
       <div
-        className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold"
+        className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-serif"
         style={{
           whiteSpace: "nowrap",
         }}
@@ -92,7 +90,7 @@ export const MultiPhraseTypewriter = ({
           repeatType: "reverse",
         }}
         className={cn(
-          "block rounded-sm w-[4px] h-4 sm:h-6 xl:h-12 bg-blue-500",
+          "block rounded-sm w-[4px] h-4 sm:h-6 xl:h-12 bg-sage",
           cursorClassName
         )}
       ></motion.span>

@@ -1,59 +1,62 @@
-import { motion } from "framer-motion";
 import { MdOutlineEmail, MdPinDrop } from "react-icons/md";
+import { ScrollReveal } from "../components/ui/ScrollReveal";
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact">
-      <div className="w-full h-full bg-gradient-to-b from-white to-zinc-100 flex items-center justify-center p-[8rem]">
-        <div className="container flex flex-col items-center justify-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-bold text-3xl md:text-4xl mb-3 text-green-600"
-          >
-            Contact
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm md:text-base mb-3 text-gray-600"
-          >
-            Let's break the ice! Hit me up! 👇
-          </motion.p>
-          <motion.hr
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="w-1/4 border-green-300 mb-10"
-          />
-          <div className="flex gap-2 items-center justify-center">
-            <motion.div className="bg-gray-100 rounded-full p-4 ml-8 text-black shadow-md hover:shadow-lg hover:text-green-600 hover:scale-105 duration-300 ease-in-out transition-all relative">
-              <MdPinDrop className="text-3xl" />
-            </motion.div>
-            <div className="flex flex-col items-center justify-start">
-              <span className="font-bold text-xl">Location</span>
-              <span className="text-sm m-auto">El Paso, Tx</span>
-            </div>
+    <section id="contact" className="w-full bg-bone">
+      <div className="section-container">
+        <div className="text-center mb-16">
+          <ScrollReveal>
+            <h2 className="section-heading">Contact</h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <p className="section-subheading">
+              Let's break the ice! Hit me up!
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <hr className="w-24 mx-auto border-sage/30" />
+          </ScrollReveal>
+        </div>
 
-            <motion.div className="bg-gray-100 rounded-full p-4 ml-8 text-black shadow-md hover:shadow-lg hover:text-green-600 hover:scale-105 duration-300 ease-in-out transition-all relative">
-              <MdOutlineEmail className="text-3xl" />
-            </motion.div>
-            <div className="flex flex-col items-center justify-start">
-              <span className="font-bold text-xl">Email</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <ScrollReveal delay={0.2} direction="left">
+            <div className="earthy-card p-8 flex flex-col items-center text-center">
+              <div className="bg-sage/10 rounded-full p-4 mb-4 text-primary hover:text-sage transition-colors duration-300">
+                <MdPinDrop className="text-3xl" />
+              </div>
+              <h3 className="font-sans font-semibold text-lg mb-1 text-primary">
+                Location
+              </h3>
+              <span className="text-sm text-muted">El Paso, TX</span>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.3} direction="right">
+            <div className="earthy-card p-8 flex flex-col items-center text-center">
+              <div className="bg-sage/10 rounded-full p-4 mb-4 text-primary hover:text-sage transition-colors duration-300">
+                <MdOutlineEmail className="text-3xl" />
+              </div>
+              <h3 className="font-sans font-semibold text-lg mb-1 text-primary">
+                Email
+              </h3>
               <a
-                href={"mailto:guillermojiga10@gmail.com?,"}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:guillermojiga10@gmail.com"
+                className="text-sm text-muted hover:text-sage transition-colors duration-300"
               >
-                <span className="cursor-pointer text-sm m-auto text-black hover:text-green-600 duration-300s transition-all">
-                  guillermojiga10@gmail.com
-                </span>
+                guillermojiga10@gmail.com
               </a>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
+
+        <ScrollReveal delay={0.4}>
+          <div className="flex justify-center mt-10">
+            <a href="mailto:guillermojiga10@gmail.com" className="btn-primary">
+              Send Email
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

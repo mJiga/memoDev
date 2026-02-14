@@ -1,165 +1,186 @@
 import { Link } from "react-router-dom";
 import pfp from "../assets/pfp.jpg";
-import { HoverBorderGradient } from "./ui/hover-border-gradient";
 import { MultiPhraseTypewriter } from "./ui/MultiPhraseTypewriter";
 
 import {
   FaReact,
   FaNodeJs,
-  FaJava,
   FaGitAlt,
   FaGithub,
   FaLinkedin,
+  FaFlask,
 } from "react-icons/fa";
 import {
-  SiMongodb,
   SiTypescript,
   SiJavascript,
   SiPython,
   SiExpress,
-  SiTailwindcss,
   SiFirebase,
+  SiCsharp,
+  SiDocker,
+  SiRedis,
+  SiFastapi,
 } from "react-icons/si";
 
 import Jimenez_Guillermo_OfficialResume from "../assets/Jimenez_Guillermo_OfficialResume.pdf";
 import { motion } from "framer-motion";
+import { DiGoogleCloudPlatform } from "react-icons/di";
+
+const techStack = [
+  { icon: FaReact, title: "React" },
+  { icon: SiFirebase, title: "Firebase" },
+  { icon: SiExpress, title: "Express" },
+  { icon: FaFlask, title: "Flask" },
+  { icon: SiFastapi, title: "FastAPI" },
+  { icon: FaNodeJs, title: "Node.js" },
+  { icon: SiDocker, title: "Docker" },
+  { icon: SiRedis, title: "Redis" },
+  { icon: DiGoogleCloudPlatform, title: "GCP" },
+  { icon: SiTypescript, title: "TypeScript" },
+  { icon: SiJavascript, title: "JavaScript" },
+  { icon: SiPython, title: "Python" },
+  { icon: SiCsharp, title: "C#" },
+  { icon: SiJavascript, title: "JavaScript" },
+  { icon: FaGitAlt, title: "Git" },
+];
 
 function Hero() {
   const phrases = [
     {
-      text: "Full-Stack 💻",
-      className: "text-5xl md:text-6xl font-bold",
+      text: "Software Engineer",
+      className: "text-4xl md:text-5xl lg:text-6xl font-serif",
     },
     {
-      text: "React Frontend 🌐",
-      className: "text-5xl md:text-6xl font-bold",
+      text: "Developer",
+      className: "text-4xl md:text-5xl lg:text-6xl font-serif",
     },
     {
-      text: "UI / UX 🎨",
-      className: "text-5xl md:text-6xl font-bold",
-    },
-    {
-      text: "Enthusiastic 😎",
-      className: "text-5xl md:text-6xl font-bold",
+      text: "Pianist",
+      className: "text-4xl md:text-5xl lg:text-6xl font-serif",
     },
   ];
 
   return (
-    <div className="py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9 }}
-            className="flex flex-col items-start max-w-5xl flex-grow"
-          >
-            <div className="relative flex flex-col h-[150px] md:h-[180px] mb-6">
-              <div className="absolute inset-0 flex items-center">
-                <MultiPhraseTypewriter
-                  phrases={phrases}
-                  className="text-5xl md:text-6xl font-bold"
-                  cursorClassName="my-cursor-class"
-                />
-              </div>
-              <h1 className="text-5xl md:text-6xl font-bold absolute bottom-0">
-                Developer
-              </h1>
+    <div className="w-full">
+      <div className="flex flex-col md:flex-row items-center gap-12">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col items-start max-w-2xl flex-grow"
+        >
+          <div className="relative flex flex-col h-[120px] md:h-[150px] mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <MultiPhraseTypewriter
+                phrases={phrases}
+                className="text-4xl md:text-5xl lg:text-6xl font-serif"
+                cursorClassName="my-cursor-class"
+              />
             </div>
-            <h2 className="font-bold text-lg md:text-xl mb-2 max-w-lg">
-              Hey,{" "}
-              <span className="text-green-600">
-                I'm Guillermo Jimenez - Memo!
-              </span>
-            </h2>
-            <h3 className="text-sm md:text-base mb-6 max-w-lg">
-              Passionate Full-Stack Developer Student by night and concert
-              pianist by day | Based in El Paso, Texas. 📍
-            </h3>
-            <div className="flex justify-center items-center ml-20 gap-4">
-              <HoverBorderGradient
-                containerClassName="rounded-full"
-                as={Link}
-                to="#contact"
-                className="flex items-center justify-center px-12 py-4 rounded-full text-sm"
-                duration={0.3}
-              >
-                Hire Me
-              </HoverBorderGradient>
+          </div>
 
-              <a
-                href={Jimenez_Guillermo_OfficialResume}
-                download="Jimenez_Guillermo_OfficialResume"
-              >
-                <button
-                  type="submit"
-                  className="flex items-center justify-center px-10 py-4 font-bold text-sm rounded-full bg-green-700 hover:bg-green-800 hover:text-gray-300 duration-300 ease-in-out"
-                >
-                  Get Resume
-                </button>
-              </a>
-            </div>
-          </motion.div>
+          <h2 className="font-sans font-semibold text-lg md:text-xl mb-2 max-w-lg text-primary">
+            Hey,{" "}
+            <span className="text-sage">I'm Guillermo Jimenez (Memo) !</span>
+          </h2>
 
-          <motion.a
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9 }}
-            className="relative flex-shrink-0 ml-8"
-          >
-            <img
-              src={pfp}
-              alt="Profile"
-              className="rounded-full w-64 h-64 md:w-96 md:h-96 object-cover"
-            />
-            <div className="absolute inset-0 rounded-full border-4 border-white"></div>
-          </motion.a>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="flex flex-col gap-4 mt-4"
-          >
-            <a
-              href="https://github.com/mJiga"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-transform duration-300 ease-in-out transform hover:scale-110 hover:text-gray-500"
+          <p className="text-sm md:text-base mb-8 max-w-lg text-muted leading-relaxed">
+            <span className="text-primary">
+              Passionate Software Engineer and concert pianist.
+            </span>
+          </p>
+          <p className="text-sm md:text-base mb-8 max-w-lg text-muted leading-relaxed">
+            incoming swe Intern @microsoft | prev explorer intern @microsoft |
+            software @utep hunt institute | cs @utep '27
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              to="#contact"
+              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white rounded-card font-medium hover:bg-primary/85 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-300"
             >
-              <FaGithub className="text-3xl mb-2" />
-            </a>
+              Hire Me
+            </Link>
+
             <a
-              href="https://www.linkedin.com/in/guillermojiga"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-transform duration-300 ease-in-out transform hover:scale-110 hover:text-blue-500"
+              href={Jimenez_Guillermo_OfficialResume}
+              download="Jimenez_Guillermo_OfficialResume"
             >
-              <FaLinkedin className="text-3xl mb-2" />
+              <button
+                type="button"
+                className="btn-outline text-sm rounded-card inline-flex items-center justify-center px-8 py-3 font-medium hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-300"
+              >
+                Get Resume
+              </button>
             </a>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative flex-shrink-0"
+        >
+          <img
+            src={pfp}
+            alt="Guillermo Jimenez portrait"
+            className="rounded-full w-56 h-56 md:w-80 md:h-80 object-cover shadow-card object-[center_25%]"
+          />
+          <div className="absolute inset-0 rounded-full border-4 border-sage/30"></div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          className="flex md:flex-col gap-4"
+        >
+          <a
+            href="https://github.com/mJiga"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary/60 transition-colors duration-300 hover:text-sage"
+          >
+            <FaGithub className="text-2xl" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/guillermojiga"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary/60 transition-colors duration-300 hover:text-accent-hover"
+          >
+            <FaLinkedin className="text-2xl" />
+          </a>
+        </motion.div>
       </div>
+
       <motion.div
-        initial={{ opacity: 0, y: -10 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.4 }}
-        className="flex gap-2 mt-4 text-4xl "
-        title="MERN stack"
+        transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+        className="mt-16"
       >
-        <span className="mt-3 text-lg">Tech Stack |</span>
-        <SiMongodb className="mt-2" title="MongoDB" />
-        <SiExpress className="mt-2" title="Express" />
-        <FaReact className="mt-2" title="React" />
-        <FaNodeJs className="mt-2" title="Node.js" />
-        <SiFirebase className="mt-2" title="Firebase.js" />
-
-        <SiTypescript className="ml-6 mt-2" title="TypeScript" />
-        <SiJavascript className="mt-2" title="JavaScript" />
-        <SiTailwindcss className="mr-6 mt-2" title="Tailwind CSS" />
-
-        <SiPython className="mt-2" title="Python" />
-        <FaJava className="mr-6 mt-2" title="Java" />
-        <FaGitAlt className="mt-2" title="Git" />
+        <p className="text-sm font-medium text-muted mb-4 tracking-wider uppercase">
+          Tech Stack
+        </p>
+        <div className="flex flex-wrap gap-3 max-w-md">
+          <div
+            className="bg-white/80 px-3 py-3 rounded-lg shadow-subtle text-primary/60 hover:text-sage hover:shadow-card transition-all duration-300 text-xs font-semibold uppercase tracking-wide flex items-center"
+            title="Model Context Protocol"
+          >
+            MCP
+          </div>
+          {techStack.map(({ icon: Icon, title }) => (
+            <div
+              key={title}
+              className="bg-white/80 p-3 rounded-lg shadow-subtle text-primary/60 hover:text-sage hover:shadow-card transition-all duration-300"
+              title={title}
+            >
+              <Icon className="text-xl" />
+            </div>
+          ))}
+        </div>
       </motion.div>
     </div>
   );

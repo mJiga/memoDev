@@ -2,9 +2,8 @@ import Hero from "../components/Hero";
 
 const Home: React.FC = () => {
   return (
-    <section id="home" className="relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-white"></div>
-      <div className="relative w-full h-full min-h-screen pb-20 flex items-center justify-center text-white z-10">
+    <section id="home" className="bg-bone">
+      <div className="section-container min-h-screen flex items-center justify-center pt-24">
         <Hero />
       </div>
     </section>

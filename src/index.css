@@ -1,8 +1,73 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Poppins", sans-serif;
+@layer base {
+  :root {
+    --color-bone: #F5F2EA;
+    --color-primary: #3D405B;
+    --color-muted: #818181;
+    --color-sage: #81B29A;
+    --color-accent-hover: #3D5A80;
+    --color-border: #E0E0E0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "DM Sans", system-ui, sans-serif;
+    color: var(--color-primary);
+    background-color: var(--color-bone);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-weight: 400;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bone);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-sage);
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-section;
+  }
+
+  .section-heading {
+    @apply font-serif text-3xl md:text-4xl lg:text-5xl text-primary font-normal mb-4;
+  }
+
+  .section-subheading {
+    @apply text-muted text-base md:text-lg mb-10;
+  }
+
+  .earthy-card {
+    @apply bg-card-bg rounded-card shadow-subtle border border-border
+           hover:shadow-card-hover transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3
+           bg-sage text-white rounded-card font-medium
+           hover:bg-sage-dark transition-colors duration-300;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-8 py-3
+           border-2 border-sage text-sage rounded-card font-medium
+           hover:bg-sage hover:text-white transition-colors duration-300;
+  }
 }

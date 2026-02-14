@@ -48,7 +48,7 @@ const Container: React.FC<{
   return (
     <div
       className={`rounded-full flex items-center justify-center bg-[rgba(248,248,248,0.01)]
-        shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]
+        shadow-subtle
         ${className}`}
     >
       {children}
@@ -86,7 +86,7 @@ const Sparkles: React.FC = () => {
             borderRadius: "50%",
             zIndex: 1,
           }}
-          className="inline-block bg-black dark:bg-white"
+          className="inline-block bg-sage/30"
         />
       ))}
     </div>
