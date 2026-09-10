@@ -23,7 +23,8 @@ npm run lint     # eslint
 src/
   data/resume.ts        Single source of truth for all resume content
   data/navigation.ts    Section ids + nav labels
-  pages/                One file per page section (Home, Experience, …)
+  pages/                One section per file (Home, Experience, Projects,
+                        About, Contact)
   components/           Header, Hero, Footer
   components/ui/        Reusable animation and layout primitives
   hooks/                useActiveSection (scroll spy)
@@ -38,25 +39,26 @@ file is usually all that's needed; the sections render from it.
 To swap the downloadable resume, replace
 `src/assets/Guillermo_Jimenez_Resume.pdf`.
 
-To add photos, drop the image into `src/assets`, import it in
-`src/pages/Experience.tsx` (or `Interests.tsx`) and add an entry to that
-file's `gallery` array. Each entry accepts an optional `position`
-(CSS `object-position`, for framing the crop) and `caption`.
+Each section shows a single photo via `<ParallaxImage>` — there is no
+carousel. To swap one, drop the image into `src/assets`, import it in the
+section, and pass `src`, `alt`, an optional `caption`, and `position`
+(CSS `object-position`, for framing the crop).
+
+`src/assets/msft-campus.jpg` and `msft-desk.jpg` are in the repo but unused —
+one import away if you want a different shot.
 
 ### Animation primitives
 
-| Component        | Purpose                                              |
-| ---------------- | ---------------------------------------------------- |
-| `Reveal`         | Scroll-triggered fade / slide / blur entrance        |
-| `TextReveal`     | Headline that unrolls word by word behind a mask     |
-| `RoleRotator`    | Cycling job descriptors with a masked vertical slide |
-| `Magnetic`       | Control that leans toward the cursor                 |
-| `SpotlightCard`  | Pointer-tracking tilt + highlight card               |
-| `Counter`        | Number that counts up when scrolled into view        |
-| `Marquee`        | Seamless looping ticker                              |
-| `Timeline`       | Experience rail whose fill tracks scroll position    |
-| `ScrollProgress` | Hairline reading-progress bar                        |
-| `Aurora`         | Drifting background colour fields                    |
+| Component        | Purpose                                           |
+| ---------------- | ------------------------------------------------- |
+| `Reveal`         | Scroll-triggered fade / slide / blur entrance     |
+| `TextReveal`     | Headline that unrolls word by word behind a mask  |
+| `Magnetic`       | Control that leans toward the cursor              |
+| `SpotlightCard`  | Pointer-tracking tilt + highlight card            |
+| `Timeline`       | Experience rail whose fill tracks scroll position |
+| `ParallaxImage`  | Single photo that drifts against the scroll       |
+| `ScrollProgress` | Hairline reading-progress bar                     |
+| `Aurora`         | Drifting background colour fields                 |
 
 Every one of these degrades to a plain fade (or no motion at all) under
 `prefers-reduced-motion: reduce`.

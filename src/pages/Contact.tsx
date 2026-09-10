@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, ArrowUpRight } from "lucide-react";
+import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 import { profile } from "../data/resume";
@@ -9,120 +8,61 @@ import { Reveal } from "../components/ui/Reveal";
 import { Magnetic } from "../components/ui/Magnetic";
 import { Aurora } from "../components/ui/Aurora";
 
-const channels = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: profile.phone,
-    href: `tel:${profile.phone.replace(/[^\d+]/g, "")}`,
-  },
-  { icon: MapPin, label: "Based in", value: profile.location },
-];
-
-const socials = [
-  { icon: FaGithub, label: "GitHub", href: profile.github, handle: "@mJiga" },
-  {
-    icon: FaLinkedin,
-    label: "LinkedIn",
-    href: profile.linkedin,
-    handle: "in/guillermojiga",
-  },
-];
-
 const Contact: FC = () => (
-  <section id="contact" className="relative w-full overflow-hidden bg-paper">
-    <Aurora className="opacity-60" />
+  <section id="contact" className="relative w-full overflow-hidden bg-bone">
+    <Aurora className="opacity-50" />
 
-    <div className="section-container relative">
+    <div className="section-container relative flex flex-col items-center text-center">
       <SectionHeading
         eyebrow="Contact"
         title="Let's build something"
         accent={["something"]}
         align="center"
-        className="mx-auto"
       >
-        {profile.status} — but always happy to talk shop, trade notes on
-        telemetry, or hear about what you're building.
+        {profile.status} — and always happy to talk shop.
       </SectionHeading>
 
-      <Reveal delay={0.15} className="mt-12 flex justify-center">
+      <Reveal delay={0.15} className="mt-10">
         <Magnetic strength={12}>
-          <a href={`mailto:${profile.email}`} className="btn-primary group px-9 py-4 text-base">
-            <Mail size={17} className="transition-transform duration-300 group-hover:-rotate-12" />
+          <a
+            href={`mailto:${profile.email}`}
+            className="btn-primary group px-8 py-4 text-[15px]"
+          >
+            <Mail
+              size={16}
+              className="transition-transform duration-300 group-hover:-rotate-12"
+            />
             {profile.email}
           </a>
         </Magnetic>
       </Reveal>
 
-      <div className="mx-auto mt-16 grid max-w-4xl gap-px overflow-hidden rounded-xl2 border border-border bg-border sm:grid-cols-3">
-        {channels.map(({ icon: Icon, label, value, href }, i) => {
-          const inner = (
-            <>
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-sage/10 text-sage-deep transition-transform duration-500 group-hover:scale-110">
-                <Icon size={17} />
-              </span>
-              <div className="min-w-0">
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-soft">
-                  {label}
-                </p>
-                <p className="mt-1 break-words text-[13.5px] leading-snug text-primary transition-colors duration-300 group-hover:text-sage-deep">
-                  {value}
-                </p>
-              </div>
-            </>
-          );
+      <Reveal delay={0.25} className="mt-8">
+        <div className="flex items-center justify-center gap-6 font-mono text-[12px] tracking-wide text-muted">
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline inline-flex items-center gap-2 transition-colors duration-300 hover:text-sage-deep"
+          >
+            <FaGithub /> mJiga
+          </a>
+          <a
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline inline-flex items-center gap-2 transition-colors duration-300 hover:text-sage-deep"
+          >
+            <FaLinkedin /> guillermojiga
+          </a>
+        </div>
+      </Reveal>
 
-          return (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, delay: i * 0.09, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-card-bg"
-            >
-              {href ? (
-                <a href={href} className="group flex items-center gap-4 p-6 transition-colors duration-500 hover:bg-bone/60">
-                  {inner}
-                </a>
-              ) : (
-                <div className="group flex items-center gap-4 p-6">{inner}</div>
-              )}
-            </motion.div>
-          );
-        })}
-      </div>
-
-      <div className="mx-auto mt-5 grid max-w-4xl gap-5 sm:grid-cols-2">
-        {socials.map(({ icon: Icon, label, href, handle }, i) => (
-          <Reveal key={label} delay={0.15 + i * 0.1}>
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-4 rounded-xl2 border border-border bg-card-bg p-6 transition-all duration-500 ease-smooth hover:-translate-y-0.5 hover:border-sage/40 hover:shadow-card"
-            >
-              <span className="flex items-center gap-4">
-                <Icon className="text-2xl text-muted transition-colors duration-300 group-hover:text-sage-deep" />
-                <span>
-                  <span className="block text-sm font-medium text-primary">{label}</span>
-                  <span className="block font-mono text-[11px] text-muted-soft">{handle}</span>
-                </span>
-              </span>
-              <ArrowUpRight
-                size={18}
-                className="text-muted-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-sage-dark"
-              />
-            </a>
-          </Reveal>
-        ))}
-      </div>
+      <Reveal delay={0.32} className="mt-8">
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-soft">
+          {profile.location}
+        </p>
+      </Reveal>
     </div>
   </section>
 );

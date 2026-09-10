@@ -8,8 +8,7 @@ import ScrollProgress from "../components/ui/ScrollProgress";
 import Home from "./Home";
 import Experience from "./Experience";
 import Projects from "./Projects";
-import Skills from "./Skills";
-import Interests from "./Interests";
+import About from "./About";
 import Contact from "./Contact";
 
 const HEADER_OFFSET = 88;
@@ -41,8 +40,7 @@ const Layout: React.FC = () => {
         <Home />
         <Experience />
         <Projects />
-        <Skills />
-        <Interests />
+        <About />
         <Contact />
       </main>
       <Footer />
