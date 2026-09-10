@@ -1,35 +1,48 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+
 import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ScrollProgress from "../components/ui/ScrollProgress";
+
 import Home from "./Home";
 import Experience from "./Experience";
-import Footer from "../components/Footer";
-import Interests from "./Interests";
 import Projects from "./Projects";
+import Skills from "./Skills";
+import Interests from "./Interests";
 import Contact from "./Contact";
+
+const HEADER_OFFSET = 88;
 
 const Layout: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const hashSelector = location.hash ? location.hash.substring(1) : "";
-    const section = document.getElementById(hashSelector);
+    const id = location.hash.slice(1);
+    if (!id) return;
 
-    if (section) {
-      const yOffset = -80;
-      const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    const top = section.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    window.scrollTo({
+      top,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
   }, [location]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-bone">
+    <div className="grain flex min-h-screen flex-col bg-bone">
+      <ScrollProgress />
       <Header />
       <main className="flex-grow">
         <Home />
         <Experience />
-        <Interests />
         <Projects />
+        <Skills />
+        <Interests />
         <Contact />
       </main>
       <Footer />

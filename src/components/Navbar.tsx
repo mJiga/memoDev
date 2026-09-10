@@ -1,49 +1,51 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { cn } from "../utils/cn";
+import { navLinks } from "../data/navigation";
 
 interface NavbarProps {
-  isScrolled?: boolean;
+  active: string;
   isMobile?: boolean;
   onLinkClick?: () => void;
 }
 
-const navLinks = [
-  { hash: "#home", label: "Home" },
-  { hash: "#experience", label: "Experience" },
-  { hash: "#projects", label: "Projects" },
-  { hash: "#interests", label: "Interests" },
-  { hash: "#contact", label: "Contact" },
-];
+const Navbar: React.FC<NavbarProps> = ({ active, isMobile, onLinkClick }) => (
+  <nav aria-label="Section navigation">
+    <ul className={cn("flex", isMobile ? "flex-col gap-1" : "items-center gap-1")}>
+      {navLinks.map(({ id, label }, i) => {
+        const isActive = active === id;
 
-const Navbar: React.FC<NavbarProps> = ({ isMobile, onLinkClick }) => {
-  const [currentPage, setCurrentPage] = useState("#home");
-  const location = useLocation();
-
-  useEffect(() => {
-    setCurrentPage(location.hash || "#home");
-  }, [location]);
-
-  return (
-    <nav>
-      <ul className={`flex ${isMobile ? "flex-col gap-4" : "gap-8"}`}>
-        {navLinks.map(({ hash, label }) => (
-          <li key={hash}>
+        return (
+          <motion.li
+            key={id}
+            initial={isMobile ? { opacity: 0, x: -12 } : false}
+            animate={isMobile ? { opacity: 1, x: 0 } : undefined}
+            transition={{ duration: 0.35, delay: i * 0.05 }}
+          >
             <Link
-              to={hash}
+              to={`#${id}`}
               onClick={onLinkClick}
-              className={`font-medium transition-all duration-300 ${
-                currentPage === hash
-                  ? "text-sage border-b-2 border-sage pb-1"
-                  : "text-primary/70 hover:text-sage"
-              }`}
+              aria-current={isActive ? "true" : undefined}
+              className={cn(
+                "relative block rounded-full px-3.5 py-2 text-[13.5px] font-medium transition-colors duration-300",
+                isMobile && "px-4 py-2.5 text-[15px]",
+                isActive ? "text-sage-deep" : "text-primary/65 hover:text-ink",
+              )}
             >
+              {isActive && (
+                <motion.span
+                  layoutId={isMobile ? "nav-pill-mobile" : "nav-pill"}
+                  className="absolute inset-0 -z-[1] rounded-full bg-sage/12 ring-1 ring-inset ring-sage/25"
+                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                />
+              )}
               {label}
             </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+          </motion.li>
+        );
+      })}
+    </ul>
+  </nav>
+);
 
 export default Navbar;
