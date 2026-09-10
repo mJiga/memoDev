@@ -67,7 +67,7 @@ function Hero() {
         >
           <span>CS @ UTEP &rsquo;27</span>
           <span className="hidden h-3 w-px bg-border sm:block" />
-          <span>prev. Microsoft &middot; Google</span>
+          <span>prev. Microsoft</span>
           <span className="hidden h-3 w-px bg-border sm:block" />
           <span>{profile.location}</span>
         </motion.p>
