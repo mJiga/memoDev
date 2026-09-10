@@ -22,7 +22,7 @@ export const profile = {
   short: "Memo",
   handle: "memo.dev",
   title: "Software Engineer",
-  roles: ["Software Engineer", "Systems & Telemetry", "AI Tooling", "Pianist"],
+  roles: ["Software Engineer", "Developer", "Pianist"],
   tagline: "Concert pianist by day, full-stack engineer by night.",
   blurb:
     "I build tools that collapse feedback loops — from a C++ CLI that turns a week of Office fleet telemetry into seconds, to an MCP server that runs my finances in plain English.",
