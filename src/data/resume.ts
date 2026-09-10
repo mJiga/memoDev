@@ -1,17 +1,20 @@
+/** One position held at a company. */
 export interface Role {
-  id: string;
-  company: string;
-  team?: string;
   title: string;
-  location: string;
+  team?: string;
   period: string;
-  start: string;
-  end: string;
-  current?: boolean;
   summary: string;
   highlights: string[];
   stack: string[];
+}
+
+/** A company groups every role held there, newest first. */
+export interface Company {
+  id: string;
+  name: string;
+  location: string;
   href?: string;
+  roles: Role[];
 }
 
 export const profile = {
@@ -20,6 +23,7 @@ export const profile = {
   handle: "memo.dev",
   title: "Software Engineer",
   roles: ["Software Engineer", "Systems & Telemetry", "AI Tooling", "Pianist"],
+  tagline: "Concert pianist by day, full-stack engineer by night.",
   blurb:
     "I build tools that collapse feedback loops — from a C++ CLI that turns a week of Office fleet telemetry into seconds, to an MCP server that runs my finances in plain English.",
   location: "El Paso, TX",
@@ -60,77 +64,77 @@ export const stack = [
   "MCP",
 ];
 
-export const experience: Role[] = [
+export const experience: Company[] = [
   {
-    id: "msft-swe",
-    company: "Microsoft",
-    team: "Click-to-Run (Deployment) — Office Product Group",
-    title: "Software Engineering Intern",
+    id: "microsoft",
+    name: "Microsoft",
     location: "Redmond, WA",
-    period: "May – Aug 2026",
-    start: "2026-05",
-    end: "2026-08",
-    summary:
-      "Owned three deployment-infrastructure projects end-to-end in a single 12-week internship, context switching between C++, KQL and Microsoft Fabric.",
-    highlights: [
-      "Cut the Office update validation loop by 99.9% — a week of fleet telemetry down to seconds — with a C++ CLI that mirrors production update behavior locally.",
-      "Reverse-engineered a deprecated Office UI surface still driving production traffic, then built a Kusto funnel to A/B test and feature-gate it, improving update speed 30%.",
-    ],
-    stack: ["C++", "Kusto (KQL)", "Microsoft Fabric"],
     href: "https://www.microsoft.com",
+    roles: [
+      {
+        title: "Software Engineering Intern",
+        team: "Click-to-Run (Deployment) — Office Product Group",
+        period: "May – Aug 2026",
+        summary:
+          "Owned three deployment-infrastructure projects end-to-end in a single 12-week internship, context switching between C++, KQL and Microsoft Fabric.",
+        highlights: [
+          "Cut the Office update validation loop by 99.9% — a week of fleet telemetry down to seconds — with a C++ CLI that mirrors production update behavior locally.",
+          "Reverse-engineered a deprecated Office UI surface still driving production traffic, then built a Kusto funnel to A/B test and feature-gate it, improving update speed 30%.",
+        ],
+        stack: ["C++", "Kusto (KQL)", "Microsoft Fabric"],
+      },
+      {
+        title: "Explorer Intern",
+        team: "Collab Services — Office Product Group",
+        period: "May – Aug 2025",
+        summary:
+          "Shipped a Copilot tool in a 3-person pod that surfaces version-level changes inside Office documents.",
+        highlights: [
+          "Cut document catch-up time 90% with a Copilot tool that surfaces version-level changes inside Office documents.",
+          "Raised comparison accuracy 70% by extending Microsoft's internal change-detection logic and tuning prompts for version-comparison tasks.",
+        ],
+        stack: ["C#", "TypeScript", "Copilot"],
+      },
+    ],
   },
   {
     id: "hunt",
-    company: "Hunt Institute for Global Competitiveness",
-    team: "Border economic research",
-    title: "Software Engineering Intern",
+    name: "Hunt Institute for Global Competitiveness",
     location: "El Paso, TX",
-    period: "Sep 2025 – May 2026",
-    start: "2025-09",
-    end: "2026-05",
-    summary:
-      "Architected and led a 3-person team building HIBRED, a data platform putting border economic indicators in front of policymakers.",
-    highlights: [
-      "Led a 3-person team shipping HIBRED — React, .NET 8 and PostgreSQL — serving 1,000+ policymakers across 10+ modules of border economic indicators.",
-      "Built an AI chat assistant on a self-hosted 7B Ollama model, giving stakeholders natural-language access to live chart data with zero database access.",
-    ],
-    stack: ["React", ".NET 8", "PostgreSQL"],
     href: "https://www.utep.edu/hunt-institute/",
-  },
-  {
-    id: "msft-explorer",
-    company: "Microsoft",
-    team: "Collab Services — Office Product Group",
-    title: "Explorer Intern",
-    location: "Redmond, WA",
-    period: "May – Aug 2025",
-    start: "2025-05",
-    end: "2025-08",
-    summary:
-      "Shipped a Copilot tool in a 3-person pod that surfaces version-level changes inside Office documents.",
-    highlights: [
-      "Cut document catch-up time 90% with a Copilot tool that surfaces version-level changes inside Office documents.",
-      "Raised comparison accuracy 70% by extending Microsoft's internal change-detection logic and tuning prompts for version-comparison tasks.",
+    roles: [
+      {
+        title: "Software Engineering Intern",
+        team: "Border economic research",
+        period: "Sep 2025 – May 2026",
+        summary:
+          "Architected and led a 3-person team building HIBRED, a data platform putting border economic indicators in front of policymakers.",
+        highlights: [
+          "Led a 3-person team shipping HIBRED — React, .NET 8 and PostgreSQL — serving 1,000+ policymakers across 10+ modules of border economic indicators.",
+          "Built an AI chat assistant on a self-hosted 7B Ollama model, giving stakeholders natural-language access to live chart data with zero database access.",
+        ],
+        stack: ["React", ".NET 8", "PostgreSQL"],
+      },
     ],
-    stack: ["C#", "TypeScript", "Copilot"],
-    href: "https://www.microsoft.com",
   },
   {
     id: "google",
-    company: "Google",
-    team: "Tech Exchange, Class of 2025",
-    title: "Student Engineer",
+    name: "Google",
     location: "Remote",
-    period: "Jan – Apr 2025",
-    start: "2025-01",
-    end: "2025-04",
-    summary:
-      "Selected for Google Tech Exchange — built and shipped a production web app alongside a Google engineer and three teammates.",
-    highlights: [
-      "Shipped a fitness tracking app to Google Cloud Run — Streamlit over BigQuery, containerized and deployed through GitHub Actions.",
-      "Improved query performance 40% with BigQuery partitioning and clustering, and integrated the Gemini API for personalized recommendations.",
-    ],
-    stack: ["Python", "BigQuery", "Cloud Run"],
     href: "https://buildyourfuture.withgoogle.com/programs/tech-exchange",
+    roles: [
+      {
+        title: "Student Engineer",
+        team: "Tech Exchange, Class of 2025",
+        period: "Jan – Apr 2025",
+        summary:
+          "Selected for Google Tech Exchange — built and shipped a production web app alongside a Google engineer and three teammates.",
+        highlights: [
+          "Shipped a fitness tracking app to Google Cloud Run — Streamlit over BigQuery, containerized and deployed through GitHub Actions.",
+          "Improved query performance 40% with BigQuery partitioning and clustering, and integrated the Gemini API for personalized recommendations.",
+        ],
+        stack: ["Python", "BigQuery", "Cloud Run"],
+      },
+    ],
   },
 ];

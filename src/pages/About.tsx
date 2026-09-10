@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { GraduationCap } from "lucide-react";
 
-import piano from "../assets/interests2.jpg";
+import piano from "../assets/interests.jpg";
 import { education, leadership, stack } from "../data/resume";
 
 import { SectionHeading } from "../components/ui/SectionHeading";
@@ -20,11 +20,11 @@ const About: FC = () => (
       <div className="mt-14 grid items-start gap-12 md:grid-cols-2 md:gap-14">
         <ParallaxImage
           src={piano}
-          alt="Guillermo Jimenez performing at a concert grand piano"
-          caption="Community concert"
-          position="center 40%"
+          alt="Sheet music on Guillermo Jimenez's piano"
+          caption="At the piano"
+          position="center 50%"
           amount={8}
-          className="aspect-[4/3] w-full shadow-card md:aspect-[4/5]"
+          className="aspect-[4/5] w-full shadow-card"
         />
 
         <div className="flex flex-col gap-8">

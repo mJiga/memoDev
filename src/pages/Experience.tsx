@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import msftInterns from "../assets/msft-interns.jpg";
-import { experience as roles } from "../data/resume";
+import { experience as companies } from "../data/resume";
 
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { Timeline } from "../components/ui/Timeline";
@@ -27,7 +27,7 @@ const Experience: FC = () => (
       />
 
       <div className="mt-16 max-w-3xl">
-        <Timeline roles={roles} />
+        <Timeline companies={companies} />
       </div>
     </div>
   </section>
