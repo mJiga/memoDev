@@ -10,6 +10,7 @@ import { profile } from "../data/resume";
 import { TextReveal } from "./ui/TextReveal";
 import { Magnetic } from "./ui/Magnetic";
 import { AnimatedFrame } from "./ui/AnimatedFrame";
+import { Typewriter } from "./ui/Typewriter";
 
 const rise = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
@@ -40,8 +41,15 @@ function Hero() {
         </h1>
 
         <motion.p
+          {...rise(0.42)}
+          className="mt-4 font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] leading-tight text-sage-dark"
+        >
+          <Typewriter phrases={profile.roles} />
+        </motion.p>
+
+        <motion.p
           {...rise(0.5)}
-          className="mt-5 max-w-lg font-serif text-[19px] leading-snug text-primary md:text-[23px]"
+          className="mt-4 max-w-lg font-serif text-[18px] leading-snug text-primary md:text-[21px]"
         >
           {profile.tagline}
         </motion.p>

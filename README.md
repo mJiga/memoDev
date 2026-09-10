@@ -54,7 +54,8 @@ one import away if you want a different shot.
 | `Reveal`         | Scroll-triggered fade / slide / blur entrance     |
 | `TextReveal`     | Headline that unrolls word by word behind a mask  |
 | `Magnetic`       | Control that leans toward the cursor              |
-| `AnimatedFrame`  | Portrait outline that traces itself, then drifts  |
+| `AnimatedFrame`  | Portrait ring that traces itself, with an orbit   |
+| `Typewriter`     | Types a phrase, holds, deletes, moves to the next |
 | `SpotlightCard`  | Pointer-tracking tilt + highlight card            |
 | `Timeline`       | Company rail whose fill tracks scroll position    |
 | `ParallaxImage`  | Single photo that drifts against the scroll       |
