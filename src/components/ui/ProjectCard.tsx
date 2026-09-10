@@ -1,14 +1,16 @@
 import { FC, ReactNode } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { ArrowUpRight } from "lucide-react";
+import { SpotlightCard } from "./SpotlightCard";
 
 export interface ProjectCardProps {
   title: string;
   description: ReactNode;
-  image: string;
+  /** Optional artwork, bled faintly into the right edge of the card. */
+  image?: string;
   href?: string;
-  tech?: { icon: ReactNode; label: string }[];
+  meta?: string;
+  tech?: string[];
   delay?: number;
 }
 
@@ -17,70 +19,84 @@ const ProjectCard: FC<ProjectCardProps> = ({
   description,
   image,
   href,
+  meta,
   tech = [],
   delay = 0,
 }) => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
+  const body = (
+    <div className="relative flex h-full flex-col gap-4 overflow-hidden rounded-xl2 p-6">
+      {image && (
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-[58%] overflow-hidden" aria-hidden>
+          <img
+            src={image}
+            alt=""
+            className="h-full w-full scale-110 object-cover opacity-[0.16] transition-all duration-[900ms] ease-smooth group-hover/spot:scale-100 group-hover/spot:opacity-[0.3]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-card-bg/70 to-card-bg" />
+        </div>
+      )}
 
-  const Wrapper = href ? motion.a : motion.div;
-  const linkProps = href
-    ? { href, target: "_blank" as const, rel: "noopener noreferrer" }
-    : {};
-
-  return (
-    <Wrapper
-      ref={ref}
-      {...linkProps}
-      className="relative group rounded-2xl overflow-hidden bg-white border border-border/60 hover:border-sage/30 hover:shadow-card-hover transition-all duration-500 flex flex-col"
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
-    >
-      {/* Subtle image accent — faded into top-right corner */}
-      <div className="absolute top-0 right-0 w-[55%] h-full overflow-hidden pointer-events-none">
-        <img
-          src={image}
-          alt=""
-          aria-hidden
-          className="w-full h-full object-cover opacity-[0.18] group-hover:opacity-[0.28] transition-opacity duration-700 scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/60 to-white" />
-      </div>
-
-      {/* Ambient glow on hover */}
-      <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-sage/[0.06] blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-      {/* Content */}
-      <div className="relative z-[1] p-6 flex flex-col flex-1 gap-4">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-serif text-xl text-primary tracking-tight">
+      <div className="relative flex items-start justify-between gap-3">
+        <div>
+          {meta && (
+            <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-soft">
+              {meta}
+            </p>
+          )}
+          <h3 className="font-serif text-xl leading-snug tracking-tight text-ink">
             {title}
           </h3>
-          {href && (
-            <FaExternalLinkAlt className="text-xs text-muted mt-1.5 opacity-0 group-hover:opacity-60 transition-opacity duration-300 shrink-0" />
-          )}
         </div>
-
-        <div className="text-sm text-muted font-light leading-relaxed flex-1">
-          {description}
-        </div>
-
-        {/* Tech pills */}
-        {tech.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            {tech.map(({ icon, label }) => (
-              <span
-                key={label}
-                className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-[11px] font-medium border border-border bg-bone text-muted transition-all duration-300 group-hover:border-sage/20 group-hover:text-sage-dark"
-              >
-                {icon}
-                {label}
-              </span>
-            ))}
-          </div>
+        {href && (
+          <ArrowUpRight
+            size={17}
+            className="mt-1 shrink-0 text-muted-soft transition-all duration-300 group-hover/spot:-translate-y-0.5 group-hover/spot:translate-x-0.5 group-hover/spot:text-sage-dark"
+          />
         )}
       </div>
-    </Wrapper>
+
+      <div className="relative flex-1 text-[13.5px] font-light leading-relaxed text-muted">
+        {description}
+      </div>
+
+      {tech.length > 0 && (
+        <div className="relative flex flex-wrap gap-1.5">
+          {tech.map((label) => (
+            <span
+              key={label}
+              className="pill text-[10.5px] group-hover/spot:border-sage/35 group-hover/spot:text-sage-deep"
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="h-full"
+    >
+      <SpotlightCard tilt={4} className="h-full">
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block h-full"
+          >
+            {body}
+          </a>
+        ) : (
+          body
+        )}
+      </SpotlightCard>
+    </motion.div>
   );
 };
 

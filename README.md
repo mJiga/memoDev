@@ -1,50 +1,71 @@
-# React + TypeScript + Vite
+# memo.dev
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio for **Guillermo Jimenez Garcia** — software engineer and
+pianist. Live at **https://mjiga.github.io/memoDev/**.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React 18 · TypeScript · Vite 5 · Tailwind CSS · Framer Motion · React Router
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm ci
+npm run dev      # local dev server
+npm run build    # typecheck + production build to dist/
+npm run preview  # serve the production build
+npm run lint     # eslint
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Structure
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+src/
+  data/resume.ts        Single source of truth for all resume content
+  data/navigation.ts    Section ids + nav labels
+  pages/                One file per page section (Home, Experience, …)
+  components/           Header, Hero, Footer
+  components/ui/        Reusable animation and layout primitives
+  hooks/                useActiveSection (scroll spy)
+```
+
+### Updating content
+
+Almost everything on the page — roles, bullet points, metrics, skills,
+education, contact details — is driven by `src/data/resume.ts`. Editing that
+file is usually all that's needed; the sections render from it.
+
+To swap the downloadable resume, replace
+`src/assets/Guillermo_Jimenez_Resume.pdf`.
+
+To add photos, drop the image into `src/assets`, import it in
+`src/pages/Experience.tsx` (or `Interests.tsx`) and add an entry to that
+file's `gallery` array. Each entry accepts an optional `position`
+(CSS `object-position`, for framing the crop) and `caption`.
+
+### Animation primitives
+
+| Component        | Purpose                                              |
+| ---------------- | ---------------------------------------------------- |
+| `Reveal`         | Scroll-triggered fade / slide / blur entrance        |
+| `TextReveal`     | Headline that unrolls word by word behind a mask     |
+| `RoleRotator`    | Cycling job descriptors with a masked vertical slide |
+| `Magnetic`       | Control that leans toward the cursor                 |
+| `SpotlightCard`  | Pointer-tracking tilt + highlight card               |
+| `Counter`        | Number that counts up when scrolled into view        |
+| `Marquee`        | Seamless looping ticker                              |
+| `Timeline`       | Experience rail whose fill tracks scroll position    |
+| `ScrollProgress` | Hairline reading-progress bar                        |
+| `Aurora`         | Drifting background colour fields                    |
+
+Every one of these degrades to a plain fade (or no motion at all) under
+`prefers-reduced-motion: reduce`.
+
+## Deployment
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which lints,
+builds, and publishes `dist/` to the `gh-pages` branch. The workflow can also
+be run manually from the Actions tab.
+
+Vite's `base` is set to `/memoDev/` in `vite.config.ts` to match the GitHub
+Pages subpath.

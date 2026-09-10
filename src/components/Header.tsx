@@ -1,61 +1,91 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+
 import Navbar from "./Navbar";
+import { useActiveSection } from "../hooks/useActiveSection";
+import { sectionIds } from "../data/navigation";
+import { cn } from "../utils/cn";
 
 const Header: React.FC = () => {
-  const [isScroll, setIsScroll] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const active = useActiveSection(sectionIds);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScroll(window.scrollY > 80);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Keep the page from scrolling behind the open mobile sheet.
+  useEffect(() => {
+    document.body.style.overflow = isMobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileOpen]);
+
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScroll
-          ? "bg-bone/90 backdrop-blur-md border-b border-border/50 py-3"
-          : "bg-transparent py-6"
-      }`}
+    <motion.header
+      initial={{ y: -70, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-smooth",
+        isScrolled
+          ? "border-b border-border/70 bg-bone/80 py-2.5 backdrop-blur-xl"
+          : "border-b border-transparent py-5",
+      )}
     >
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 flex justify-between items-center">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 sm:px-8 lg:px-12">
         <Link
           to="#home"
-          className={`font-serif tracking-tight transition-all duration-300 ${
-            isScroll ? "text-2xl" : "text-3xl md:text-4xl"
-          } ${isScroll ? "text-primary" : "text-primary"}`}
+          className={cn(
+            "font-serif tracking-tight text-ink transition-all duration-500 ease-smooth",
+            isScrolled ? "text-2xl" : "text-[1.75rem] md:text-3xl",
+          )}
         >
-          memo<span className="text-sage">.dev</span>
+          memo<span className="text-sage-dark">.dev</span>
         </Link>
 
         <div className="hidden md:block">
-          <Navbar isScrolled={isScroll} />
+          <Navbar active={active} />
         </div>
 
         <button
-          className="md:hidden text-primary p-2"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label="Toggle menu"
+          className="-mr-2 p-2 text-ink md:hidden"
+          onClick={() => setIsMobileOpen((open) => !open)}
+          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMobileOpen}
         >
-          {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {isMobileOpen && (
-        <nav className="md:hidden bg-bone/95 backdrop-blur-md border-t border-border/50 px-6 py-4">
-          <Navbar
-            isScrolled={true}
-            isMobile
-            onLinkClick={() => setIsMobileOpen(false)}
-          />
-        </nav>
-      )}
-    </header>
+      <AnimatePresence>
+        {isMobileOpen && (
+          <motion.nav
+            key="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden border-t border-border/70 bg-bone/95 backdrop-blur-xl md:hidden"
+          >
+            <div className="px-4 py-4">
+              <Navbar
+                active={active}
+                isMobile
+                onLinkClick={() => setIsMobileOpen(false)}
+              />
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

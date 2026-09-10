@@ -1,88 +1,111 @@
 import { FC } from "react";
-import msft from "../assets/msft.png";
-import hunt from "../assets/hunt.jpg";
+import { Users } from "lucide-react";
+
+import msftInterns from "../assets/msft-interns.jpg";
+import msftCampus from "../assets/msft-campus.jpg";
+import msftDesk from "../assets/msft-desk.jpg";
 import experience from "../assets/experience.jpeg";
 import experience2 from "../assets/experience2.jpg";
 import experience3 from "../assets/experience3.jpg";
-import { ScrollReveal } from "../components/ui/ScrollReveal";
-import { ImageCarousel } from "../components/ui/ImageCarousel";
-import ProjectCard from "../components/ui/ProjectCard";
 
-const experienceImages = [
-  { src: experience, alt: "Guillermo Jimenez at Microsoft" },
-  { src: experience2, alt: "Guillermo Jimenez working on projects" },
-  { src: experience3, alt: "Guillermo Jimenez at a tech event" },
+import { experience as roles, leadership } from "../data/resume";
+import { SectionHeading } from "../components/ui/SectionHeading";
+import { Timeline } from "../components/ui/Timeline";
+import { Reveal } from "../components/ui/Reveal";
+import {
+  ImageCarousel,
+  type CarouselImage,
+} from "../components/ui/ImageCarousel";
+
+/**
+ * Photos from internships and events. Drop new images into src/assets,
+ * import them above, and add an entry here — the carousel picks up the rest.
+ */
+const gallery: CarouselImage[] = [
+  {
+    src: msftInterns,
+    alt: "Guillermo Jimenez with fellow interns at the Microsoft Plaza sign",
+    caption: "Intern cohort — Microsoft Plaza, Redmond",
+    position: "center 55%",
+  },
+  {
+    src: msftCampus,
+    alt: "The Microsoft sign on the Redmond campus",
+    caption: "Redmond campus",
+    position: "center 60%",
+  },
+  {
+    src: msftDesk,
+    alt: "A laptop on a balcony desk overlooking Pacific Northwest evergreens",
+    caption: "Outdoor desk, Building 25",
+    position: "center 68%",
+  },
+  {
+    src: experience,
+    alt: "Guillermo Jimenez at Microsoft",
+    caption: "On campus",
+  },
+  {
+    src: experience2,
+    alt: "Guillermo Jimenez working on a project",
+    caption: "Heads down",
+  },
+  {
+    src: experience3,
+    alt: "Guillermo Jimenez at a tech event",
+    caption: "Tech event",
+  },
 ];
 
-const Experience: FC = () => {
-  return (
-    <section id="experience" className="w-full bg-white">
-      <div className="section-container">
-        <div className="text-center mb-12">
-          <ScrollReveal>
-            <h2 className="section-heading">Experience</h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <p className="section-subheading">My work Experience</p>
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
-            <hr className="w-24 mx-auto border-sage/30" />
-          </ScrollReveal>
-        </div>
+const Experience: FC = () => (
+  <section id="experience" className="relative w-full bg-paper">
+    <div className="section-container">
+      <SectionHeading
+        eyebrow="Experience"
+        title="Where I've shipped"
+        accent={["shipped"]}
+      >
+        Three internships, one research platform and a Google program — each one
+        measured by what it saved the people using it.
+      </SectionHeading>
 
-        <div className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
-          <ScrollReveal direction="left" delay={0.2} className="md:w-1/2">
+      <div className="mt-16 grid gap-14 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12">
+        <Timeline roles={roles} />
+
+        {/* Sidebar: photos + leadership */}
+        <aside className="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
+          <Reveal direction="right" delay={0.15}>
             <ImageCarousel
-              images={experienceImages}
-              className="w-full aspect-square shadow-card"
-              interval={7000}
+              images={gallery}
+              className="aspect-[4/3] w-full shadow-card"
+              interval={6000}
             />
-          </ScrollReveal>
+          </Reveal>
 
-          <ScrollReveal
-            direction="right"
-            delay={0.3}
-            className="flex flex-col gap-4 md:w-3/5"
-          >
-            <h2 className="font-serif text-2xl md:text-3xl text-primary">
-              Software Engineer
-            </h2>
-            <p className="text-sm md:text-base text-primary/80 leading-relaxed">
-              So early in my professional career, I've had the privilege of
-              interning at Microsoft as an explorer intern and now as software
-              engineering intern. Additionally, I interned at the UTEP Hunt
-              Institute. These experiences have allowed me to work on impactful
-              projects, collaborate with talented teams, and grow my skills as a
-              software engineer. I'm excited to continue building my career and
-              making a positive impact in the tech industry through my work and
-              contributions.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-              <ProjectCard
-                title="Incoming SWE Intern"
-                description="Microsoft"
-                image={msft}
-                delay={0.1}
-              />
-              <ProjectCard
-                title="Prev Explorer Intern"
-                description="Microsoft"
-                image={msft}
-                delay={0.2}
-              />
-              <ProjectCard
-                title="SWE Intern"
-                description="UTEP Hunt Institute"
-                image={hunt}
-                href="https://www.utep.edu/hunt-institute/"
-                delay={0.3}
-              />
+          <Reveal direction="right" delay={0.25}>
+            <div className="surface p-6">
+              <span className="eyebrow">
+                <Users size={13} />
+                Leadership
+              </span>
+              <h3 className="mt-3 font-serif text-xl leading-snug text-ink">
+                {leadership.org}
+              </h3>
+              <p className="mt-1 text-sm font-medium text-primary">
+                {leadership.role}
+              </p>
+              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-soft">
+                {leadership.period} &middot; {leadership.location}
+              </p>
+              <p className="mt-4 text-[13.5px] font-light leading-relaxed text-muted">
+                {leadership.detail}
+              </p>
             </div>
-          </ScrollReveal>
-        </div>
+          </Reveal>
+        </aside>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Experience;

@@ -127,7 +127,7 @@ const JarvShowcase: FC = () => {
 
       <div
         ref={wrapperRef}
-        className="relative bg-white rounded-2xl overflow-hidden flex items-center justify-center"
+        className="relative flex items-center justify-center overflow-hidden rounded-xl2 border border-border bg-card-bg shadow-subtle"
       >
         <canvas
           ref={canvasRef}
@@ -166,7 +166,7 @@ const JarvShowcase: FC = () => {
                 Jarv
               </h3>
             </div>
-            <p className="text-sm text-muted font-light tracking-wide leading-relaxed max-w-[480px] mx-auto">
+            <p className="text-sm font-light text-muted tracking-wide leading-relaxed max-w-[480px] mx-auto">
               Personal finance{" "}
               <em className="text-sage not-italic font-medium">MCP server</em> &
               LLM agent that converts natural language into structured financial

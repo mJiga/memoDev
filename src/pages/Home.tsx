@@ -1,13 +1,14 @@
 import Hero from "../components/Hero";
 
-const Home: React.FC = () => {
-  return (
-    <section id="home" className="bg-bone">
-      <div className="section-container min-h-screen flex items-center justify-center pt-24">
-        <Hero />
-      </div>
-    </section>
-  );
-};
+const Home: React.FC = () => (
+  <section
+    id="home"
+    className="relative flex min-h-screen items-center overflow-hidden bg-bone"
+  >
+    <div className="section-container pt-32 pb-20 md:pt-36">
+      <Hero />
+    </div>
+  </section>
+);
 
 export default Home;
