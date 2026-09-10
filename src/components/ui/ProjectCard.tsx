@@ -6,8 +6,6 @@ import { SpotlightCard } from "./SpotlightCard";
 export interface ProjectCardProps {
   title: string;
   description: ReactNode;
-  /** Optional artwork, bled faintly into the right edge of the card. */
-  image?: string;
   href?: string;
   meta?: string;
   tech?: string[];
@@ -17,7 +15,6 @@ export interface ProjectCardProps {
 const ProjectCard: FC<ProjectCardProps> = ({
   title,
   description,
-  image,
   href,
   meta,
   tech = [],
@@ -25,17 +22,6 @@ const ProjectCard: FC<ProjectCardProps> = ({
 }) => {
   const body = (
     <div className="relative flex h-full flex-col gap-4 overflow-hidden rounded-xl2 p-6">
-      {image && (
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-[58%] overflow-hidden" aria-hidden>
-          <img
-            src={image}
-            alt=""
-            className="h-full w-full scale-110 object-cover opacity-[0.16] transition-all duration-[900ms] ease-smooth group-hover/spot:scale-100 group-hover/spot:opacity-[0.3]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-card-bg/70 to-card-bg" />
-        </div>
-      )}
-
       <div className="relative flex items-start justify-between gap-3">
         <div>
           {meta && (
