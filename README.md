@@ -54,8 +54,9 @@ one import away if you want a different shot.
 | `Reveal`         | Scroll-triggered fade / slide / blur entrance     |
 | `TextReveal`     | Headline that unrolls word by word behind a mask  |
 | `Magnetic`       | Control that leans toward the cursor              |
+| `AnimatedFrame`  | Portrait outline that traces itself, then drifts  |
 | `SpotlightCard`  | Pointer-tracking tilt + highlight card            |
-| `Timeline`       | Experience rail whose fill tracks scroll position |
+| `Timeline`       | Company rail whose fill tracks scroll position    |
 | `ParallaxImage`  | Single photo that drifts against the scroll       |
 | `ScrollProgress` | Hairline reading-progress bar                     |
 | `Aurora`         | Drifting background colour fields                 |

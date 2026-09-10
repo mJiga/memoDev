@@ -7,7 +7,7 @@ const Home: React.FC = () => (
     className="relative flex min-h-screen items-center overflow-hidden bg-bone"
   >
     <Aurora className="opacity-55" />
-    <div className="relative mx-auto w-full max-w-3xl px-6 pb-20 pt-32 sm:px-8 md:pt-36">
+    <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-32 sm:px-8 lg:px-12 md:pt-36">
       <Hero />
     </div>
   </section>
