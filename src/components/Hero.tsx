@@ -17,88 +17,122 @@ const rise = (delay: number) => ({
   transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] as const },
 });
 
+const socials = [
+  { href: profile.github, Icon: FaGithub, label: "GitHub" },
+  { href: profile.linkedin, Icon: FaLinkedin, label: "LinkedIn" },
+];
+
 function Hero() {
   return (
-    <div className="w-full">
-      <motion.span {...rise(0.05)} className="eyebrow">
-        <span className="h-px w-8 bg-sage/60" />
-        {profile.status}
-      </motion.span>
+    <div className="flex w-full flex-col items-center gap-12 lg:flex-row lg:gap-16">
+      {/* ── Left: the information ── */}
+      <div className="flex-1 lg:min-w-0">
+        <motion.span {...rise(0.05)} className="eyebrow">
+          <span className="h-px w-8 bg-sage/60" />
+          {profile.status}
+        </motion.span>
 
-      <h1 className="mt-8 font-serif text-[clamp(2.8rem,9vw,6.2rem)] leading-[0.9] tracking-[-0.04em] text-ink">
-        <TextReveal text="Guillermo" delay={0.12} />
-        <span className="block text-sage-dark">
-          <TextReveal text="Jimenez" delay={0.24} />
-        </span>
-      </h1>
+        <h1 className="mt-6 font-serif text-[clamp(2.6rem,5.6vw,4.1rem)] leading-[0.98] tracking-[-0.035em] text-ink">
+          <TextReveal text="Guillermo" delay={0.12} />
+          <span className="block text-sage-dark">
+            <TextReveal text="Jimenez" delay={0.22} />
+          </span>
+        </h1>
 
-      <motion.div
-        {...rise(0.6)}
-        className="mt-9 flex flex-col gap-9 border-t border-border pt-8 md:flex-row md:items-start md:justify-between md:gap-14"
-      >
-        {/* Copy */}
-        <div className="max-w-xl">
-          <p className="font-serif text-[21px] leading-snug text-primary md:text-[27px]">
-            {profile.tagline}
-          </p>
-          <p className="mt-4 text-[14.5px] font-light leading-[1.8] text-muted">
-            {profile.blurb}
-          </p>
-        </div>
+        <motion.p
+          {...rise(0.5)}
+          className="mt-5 max-w-lg font-serif text-[19px] leading-snug text-primary md:text-[23px]"
+        >
+          {profile.tagline}
+        </motion.p>
 
-        {/* Portrait above the controls */}
-        <div className="flex shrink-0 flex-col items-start gap-5 md:items-end">
-          <AnimatedFrame
-            src={pfp}
-            alt={`${profile.name}, software engineer`}
-            delay={0.75}
-            className="aspect-[4/5] w-36 sm:w-40 md:w-44"
-          />
+        <motion.p
+          {...rise(0.6)}
+          className="mt-4 max-w-lg text-[14.5px] font-light leading-[1.8] text-muted"
+        >
+          {profile.blurb}
+        </motion.p>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Magnetic strength={10}>
-              <Link to="#contact" className="btn-primary group">
-                <Mail
-                  size={15}
-                  className="transition-transform duration-300 group-hover:-rotate-12"
-                />
-                Get in touch
-              </Link>
-            </Magnetic>
-            <Magnetic strength={10}>
-              <a
-                href={resumePdf}
-                download="Guillermo_Jimenez_Resume.pdf"
-                className="btn-outline group"
-              >
-                <Download
-                  size={15}
-                  className="transition-transform duration-300 group-hover:translate-y-0.5"
-                />
-                Resume
-              </a>
-            </Magnetic>
-          </div>
+        <motion.p
+          {...rise(0.68)}
+          className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-soft"
+        >
+          <span>CS @ UTEP &rsquo;27</span>
+          <span className="hidden h-3 w-px bg-border sm:block" />
+          <span>prev. Microsoft &middot; Google</span>
+          <span className="hidden h-3 w-px bg-border sm:block" />
+          <span>{profile.location}</span>
+        </motion.p>
 
-          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-soft">
-            {[
-              { href: profile.github, Icon: FaGithub, label: "GitHub" },
-              { href: profile.linkedin, Icon: FaLinkedin, label: "LinkedIn" },
-            ].map(({ href, Icon, label }) => (
+        <motion.div {...rise(0.78)} className="mt-8 flex flex-wrap items-center gap-3">
+          <Magnetic strength={10}>
+            <Link to="#contact" className="btn-primary group">
+              <Mail
+                size={15}
+                className="transition-transform duration-300 group-hover:-rotate-12"
+              />
+              Get in touch
+            </Link>
+          </Magnetic>
+          <Magnetic strength={10}>
+            <a
+              href={resumePdf}
+              download="Guillermo_Jimenez_Resume.pdf"
+              className="btn-outline group"
+            >
+              <Download
+                size={15}
+                className="transition-transform duration-300 group-hover:translate-y-0.5"
+              />
+              Resume
+            </a>
+          </Magnetic>
+
+          {/* Socials sit inline on phones, and move to the rail on desktop */}
+          <div className="flex items-center gap-1 lg:hidden">
+            {socials.map(({ href, Icon, label }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="transition-colors duration-300 hover:text-sage-deep"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-muted-soft transition-colors duration-300 hover:text-sage-deep"
               >
-                <Icon className="text-base" />
+                <Icon className="text-lg" />
               </a>
             ))}
-            <span className="ml-1">{profile.location}</span>
           </div>
-        </div>
+        </motion.div>
+      </div>
+
+      {/* ── Right: the headshot ── */}
+      <AnimatedFrame
+        src={pfp}
+        alt={`${profile.name}, software engineer`}
+        delay={0.35}
+        className="h-56 w-56 shrink-0 sm:h-64 sm:w-64 lg:h-72 lg:w-72"
+      />
+
+      {/* ── Social rail ── */}
+      <motion.div
+        {...rise(0.9)}
+        className="hidden shrink-0 flex-col items-center gap-4 lg:flex"
+      >
+        {socials.map(({ href, Icon, label }) => (
+          <Magnetic key={label} strength={8}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="flex h-11 w-11 items-center justify-center rounded-full text-muted-soft transition-colors duration-300 hover:text-sage-deep"
+            >
+              <Icon className="text-xl" />
+            </a>
+          </Magnetic>
+        ))}
+        <span className="h-14 w-px bg-gradient-to-b from-border to-transparent" />
       </motion.div>
     </div>
   );

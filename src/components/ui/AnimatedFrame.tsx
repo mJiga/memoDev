@@ -4,14 +4,14 @@ import { cn } from "../../utils/cn";
 interface AnimatedFrameProps {
   src: string;
   alt: string;
-  /** When the frame starts drawing itself, in seconds. */
+  /** When the ring starts tracing itself, in seconds. */
   delay?: number;
   className?: string;
 }
 
 /**
- * Portrait wrapped in an offset outline that traces itself on mount, then
- * drifts slowly. The corner ticks draw in behind it.
+ * Round portrait inside a ring that traces itself on mount, a slow
+ * counter-rotating dashed ring, and a dot orbiting the edge.
  */
 export const AnimatedFrame = ({
   src,
@@ -24,62 +24,71 @@ export const AnimatedFrame = ({
   return (
     <motion.div
       className={cn("relative", className)}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Outline that traces itself, offset behind the photo */}
-      <motion.svg
-        className="pointer-events-none absolute -inset-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)]"
+      {/* Solid ring, traced on mount */}
+      <svg
+        className="pointer-events-none absolute -inset-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] -rotate-90"
         viewBox="0 0 100 100"
-        preserveAspectRatio="none"
         aria-hidden
-        animate={reduced ? {} : { x: [0, 5, 0], y: [0, -4, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       >
-        <motion.rect
-          x="1"
-          y="1"
-          width="98"
-          height="98"
-          rx="7"
+        <motion.circle
+          cx="50"
+          cy="50"
+          r="49"
           fill="none"
           stroke="currentColor"
-          strokeWidth="0.6"
-          vectorEffect="non-scaling-stroke"
-          className="text-sage/60"
+          strokeWidth="0.5"
+          className="text-sage/70"
           initial={{ pathLength: reduced ? 1 : 0 }}
           animate={{ pathLength: 1 }}
           transition={{
             duration: reduced ? 0 : 1.8,
-            delay: delay + 0.25,
+            delay: delay + 0.2,
             ease: [0.16, 1, 0.3, 1],
           }}
         />
+      </svg>
+
+      {/* Dashed ring drifting the other way */}
+      <motion.svg
+        className="pointer-events-none absolute -inset-7 h-[calc(100%+3.5rem)] w-[calc(100%+3.5rem)]"
+        viewBox="0 0 100 100"
+        aria-hidden
+        animate={reduced ? {} : { rotate: -360 }}
+        transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="49"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.3"
+          strokeDasharray="1.5 3.5"
+          className="text-sage/35"
+        />
       </motion.svg>
 
-      {/* Corner ticks */}
-      {["-top-1 -left-1", "-top-1 -right-1", "-bottom-1 -left-1", "-bottom-1 -right-1"].map(
-        (pos, i) => (
-          <motion.span
-            key={pos}
-            className={cn("absolute h-1.5 w-1.5 rounded-full bg-sage", pos)}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{
-              duration: 0.5,
-              delay: delay + 1.5 + i * 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          />
-        ),
+      {/* Dot riding the inner ring */}
+      {!reduced && (
+        <motion.div
+          className="pointer-events-none absolute -inset-3"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          aria-hidden
+        >
+          <span className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sage shadow-glow" />
+        </motion.div>
       )}
 
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-paper shadow-card">
+      <div className="relative h-full w-full overflow-hidden rounded-full border border-border bg-paper shadow-card">
         <img
           src={src}
           alt={alt}
-          className="h-full w-full object-cover object-[center_18%] transition-transform duration-[1.4s] ease-smooth hover:scale-[1.05]"
+          className="h-full w-full object-cover object-[center_18%] transition-transform duration-[1.4s] ease-smooth hover:scale-[1.06]"
         />
       </div>
     </motion.div>
