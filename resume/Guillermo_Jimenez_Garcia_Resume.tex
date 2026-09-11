@@ -5,7 +5,7 @@
 % License : MIT
 %------------------------
 
-\documentclass[letterpaper,10.5pt]{article}
+\documentclass[letterpaper,10pt]{article}
 
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
@@ -18,13 +18,8 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
+\usepackage{charter}
 \input{glyphtounicode}
-
-%----------FONT OPTIONS----------
-% Uncomment ONE to change the typeface. Default is Computer Modern.
-% \usepackage[sfdefault]{FiraSans}
-% \usepackage[sfdefault]{roboto}
-% \usepackage{charter}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -32,55 +27,56 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Adjust margins
+% Margins: ~0.3in top/bottom, 0.35in sides
 \addtolength{\oddsidemargin}{-0.65in}
 \addtolength{\evensidemargin}{-0.65in}
 \addtolength{\textwidth}{1.3in}
-\addtolength{\topmargin}{-.95in}
-\addtolength{\textheight}{1.85in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
 
 \urlstyle{same}
 
 \raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
+\setlength{\parindent}{0pt}
 
-% Sections formatting
-\titleformat{\section}{
-  \vspace{-6pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+% Sections formatting: {left}{before}{after} -- explicit, no negative hacks
+\titleformat{\section}{\large\bfseries\raggedright}{}{0em}{\MakeUppercase}[\color{black}\titlerule]
+\titlespacing*{\section}{0pt}{7pt}{3pt}
 
 % Ensure that generated PDF is machine readable / ATS parsable
 \pdfgentounicode=1
 
 %-------------------------
 % Custom commands
-\newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-3pt}}
-  }
-}
+\newcommand{\resumeItem}[1]{\item\small{#1}}
 
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+  \item
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-3pt}
+    \end{tabular*}
 }
 
 \newcommand{\resumeProjectHeading}[2]{
     \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
       \small#1 & #2 \\
-    \end{tabular*}\vspace{-3pt}
+    \end{tabular*}
 }
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, topsep=0pt, itemsep=5pt, parsep=0pt]}
+% Gap BETWEEN entries (jobs/projects) is the single knob: itemsep
+\newcommand{\resumeSubHeadingListStart}
+  {\begin{itemize}[leftmargin=0in, label={}, topsep=0pt, itemsep=5pt, parsep=0pt, partopsep=0pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=2pt, itemsep=1pt, parsep=0pt, leftmargin=*]}
+
+% Gap between bullets inside one entry
+\newcommand{\resumeItemListStart}
+  {\begin{itemize}[leftmargin=0.17in, topsep=3pt, itemsep=2pt, parsep=0pt, partopsep=0pt]}
 \newcommand{\resumeItemListEnd}{\end{itemize}}
 
 %-------------------------------------------
@@ -90,7 +86,7 @@
 
 %----------HEADING----------
 \begin{center}
-    \textbf{\Huge \scshape Guillermo Jimenez Garcia} \\ \vspace{1pt}
+    \textbf{\Huge Guillermo Jimenez Garcia} \\ \vspace{3pt}
     \small
     \href{mailto:guillermojiga10@gmail.com}{\underline{guillermojiga10@gmail.com}} $|$
     +1 (915) 801-8073 $|$
@@ -108,21 +104,19 @@
       \resumeItemListStart
         \resumeItem{\textbf{Relevant Coursework:} Data Structures \& Algorithms, Computer Architecture, Operating Systems, Advanced OOP, Database Systems}
         \resumeItem{\textbf{Google Tech Exchange} (Spring 2025): Algorithms \& System Design, Intro to Software Engineering with GenAI, Careers in Tech}
-        \resumeItem{\textbf{Honors \& Awards:} College of Engineering Dean's List, Fall 2023 -- Spring 2026}
-        \resumeItem{\textbf{Certifications:} Meta Front-End Developer Professional Certificate, Google Intro to Generative AI}
+        \resumeItem{\textbf{Honors:} College of Engineering Dean's List, Fall 2023 -- Spring 2026 $|$ \textbf{Certifications:} Meta Front-End Developer, Google Generative AI}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
 %-----------SKILLS-----------
 \section{Skills}
- \begin{itemize}[leftmargin=0.15in, label={}]
+ \begin{itemize}[leftmargin=0in, label={}, topsep=0pt, parsep=0pt, partopsep=0pt]
     \small{\item{
      \textbf{Languages}{: C++, Python, Java, C\#, JavaScript, TypeScript, SQL} \\
-     \textbf{Libraries}{: Playwright, Selenium, Pandas, NumPy, Chart.js, D3.js} \\
-     \textbf{Frameworks}{: React, Express.js, Node.js, Flask, Streamlit} \\
+     \textbf{Libraries/Frameworks}{: React, Node.js, Express.js, Flask, Streamlit, Playwright, Selenium, Pandas, NumPy, Chart.js, D3.js} \\
      \textbf{Databases}{: PostgreSQL, MongoDB, Firebase} \\
      \textbf{Technologies}{: Git/GitHub, GitHub Actions, Google Cloud (BigQuery, Cloud Run), Docker, Microsoft Fabric, Kusto (KQL), .NET 8, IIS, HTML, CSS, Telemetry} \\
-     \textbf{AI/Agentic Tools}{: Model Context Protocol (MCP), Copilot, Ollama, Claude Code, Codex, Cursor, Gemini, ChatGPT} \\
+     \textbf{AI/Agentic Tools}{: Model Context Protocol (MCP), Copilot, Ollama, Claude Code, Codex, Cursor, Gemini, ChatGPT}
     }}
  \end{itemize}
 
@@ -134,19 +128,19 @@
       {Microsoft}{May -- August 2026}
       {Software Engineering Intern -- Click-to-Run (Deployment), Office Product Group}{Redmond, WA}
       \resumeItemListStart
-        \resumeItem{Cut Office update validation feedback loop \textbf{99.9\%}, from \textbf{~1 week} of fleet telemetry to seconds, by building a \textbf{C++} CLI tool that mirrors production update behavior locally}
-        \resumeItem{Reverse-engineered a deprecated busbar driving production update traffic; built a \textbf{Kusto} telemetry funnel to A/B test and feature-gate it before rollout, improving update speed and device adoption by \textbf{30\%}}
-        \resumeItem{Unlocked \textbf{Copilot} adoption and build-currency insights by engineering a \textbf{Fabric} ETL pipeline that joined two previously incompatible telemetry datasets}
-        \resumeItem{Independently owned all \textbf{3} projects end-to-end across a single \textbf{12-week} internship, context switching between \textbf{C++}, \textbf{KQL}, and \textbf{Fabric}, while ramping up using AI development tooling}
+        \resumeItem{Cut Office update validation \textbf{99.9\%}, from ${\sim}$\textbf{1 week} of fleet telemetry to seconds, with a \textbf{C++} CLI tool mirroring production update behavior locally}
+        \resumeItem{Reverse-engineered a deprecated busbar driving production update traffic; built a \textbf{Kusto} funnel to A/B test and feature-gate it, improving update speed and device adoption \textbf{30\%}}
+        \resumeItem{Unlocked \textbf{Copilot} adoption and build-currency insights with a \textbf{Fabric} ETL pipeline joining two previously incompatible telemetry datasets}
+        \resumeItem{Owned all \textbf{3} projects end-to-end in a single \textbf{12-week} internship, context switching between \textbf{C++}, \textbf{KQL}, and \textbf{Fabric}}
       \resumeItemListEnd
 
     \resumeSubheading
       {Microsoft}{May -- August 2025}
       {Explorer Intern -- Collab Services, Office Product Group}{Redmond, WA}
       \resumeItemListStart
-        \resumeItem{Collaborated in a \textbf{3-person} pod to cut document catch-up time \textbf{90\%} and boost user productivity \textbf{70\%}, building a \textbf{Copilot} tool that surfaces version-level changes in Office documents}
-        \resumeItem{Raised document comparison accuracy \textbf{70\%} by extending change-detection logic and optimizing \textbf{LLM} prompts for version-comparison tasks}
-        \resumeItem{Surfaced \textbf{8} critical product pain points from a \textbf{7-participant} user study, driving roadmap decisions through weekly Scrum meetings with cross-functional teams}
+        \resumeItem{Cut document catch-up time \textbf{90\%} and boosted user productivity \textbf{70\%} in a \textbf{3-person} pod, building a \textbf{Copilot} tool surfacing version-level changes in Office documents}
+        \resumeItem{Raised document comparison accuracy \textbf{70\%} by extending change-detection logic and optimizing \textbf{LLM} prompts for version comparison}
+        \resumeItem{Surfaced \textbf{8} product pain points from a \textbf{7-participant} user study, driving roadmap decisions in weekly cross-functional Scrum meetings}
         \resumeItem{Hardened comparison reliability in \textbf{C\#} and \textbf{TypeScript} through stress testing and \textbf{TDD}, catching edge cases before rollout}
       \resumeItemListEnd
 
@@ -154,17 +148,17 @@
       {Hunt Institute for Global Competitiveness}{September 2025 -- May 2026}
       {Software Engineering Intern}{El Paso, TX}
       \resumeItemListStart
-        \resumeItem{Architected and led a \textbf{3-person} team building \textbf{HIBRED} -- a \textbf{React}/\textbf{TypeScript}, \textbf{.NET 8}, \textbf{PostgreSQL} data platform serving \textbf{1,000+} policymakers across \textbf{10+} modules on border economic indicators}
-        \resumeItem{Built an AI chat assistant on a self-hosted \textbf{7B-parameter} \textbf{Ollama} LLM, giving stakeholders natural-language access to live chart data with zero database access}
+        \resumeItem{Led a \textbf{3-person} team building \textbf{HIBRED}, a \textbf{React}/\textbf{TypeScript}, \textbf{.NET 8}, \textbf{PostgreSQL} platform serving \textbf{1,000+} policymakers across \textbf{10+} border-economic modules}
+        \resumeItem{Built an AI chat assistant on a self-hosted \textbf{7B-parameter} \textbf{Ollama} LLM, giving stakeholders natural-language access to live chart data}
         \resumeItem{Eliminated \textbf{SQL injection} risk across all public-facing endpoints by replacing dynamic query building with parameterized queries}
-        \resumeItem{Automated wage data collection with a \textbf{Python} ETL pipeline (\textbf{pandas}), cutting processing time by \textbf{95\%} and inconsistencies by \textbf{30\%}, published in the \href{https://www.utep.edu/hunt-institute/newsletter/}{\underline{Newsletter}} and \href{https://www.utep.edu/hunt-institute/researchpapers/white-papers-doc/Files/EmploymentShiftsinCDJ-HI-2025.pdf}{\underline{White Paper}}}
+        \resumeItem{Automated wage data collection with a \textbf{Python}/\textbf{pandas} ETL pipeline, cutting processing time \textbf{95\%} and inconsistencies \textbf{30\%}; published in the \href{https://www.utep.edu/hunt-institute/newsletter/}{\underline{Newsletter}} and \href{https://www.utep.edu/hunt-institute/researchpapers/white-papers-doc/Files/EmploymentShiftsinCDJ-HI-2025.pdf}{\underline{White Paper}}}
       \resumeItemListEnd
 
     \resumeSubheading
       {Google}{January -- April 2025}
       {Google Tech Exchange Class of 2025, Student}{Remote}
       \resumeItemListStart
-        \resumeItem{Shipped a fitness tracking web app to \textbf{Google Cloud Run}, building a \textbf{Streamlit} UI over \textbf{BigQuery} with \textbf{Docker} and \textbf{GitHub Actions} CI/CD, with a Google engineer and \textbf{3} teammates}
+        \resumeItem{Shipped a fitness tracking web app to \textbf{Google Cloud Run}: \textbf{Streamlit} UI over \textbf{BigQuery}, \textbf{Docker}, \textbf{GitHub Actions} CI/CD, with a Google engineer}
         \resumeItem{Improved query performance \textbf{40\%} via \textbf{BigQuery} optimizations and integrated the \textbf{Gemini API} for personalized fitness recommendations}
       \resumeItemListEnd
 
@@ -177,8 +171,8 @@
       \resumeProjectHeading
         {\textbf{Jarv Personal Finance MCP Server} $|$ \emph{Python, Notion API, Model Context Protocol}}{March 2026}
         \resumeItemListStart
-          \resumeItem{Cut monthly finance review time to \textbf{under 60 seconds} by building a custom \textbf{MCP} server in \textbf{Python} that turns voice, image, and text commands into live \textbf{Notion} operations}
-          \resumeItem{Replaced a full suite of financial tools -- expense logging, budgeting, paycheck splitting -- with a single AI-native interface handling \textbf{100\%} of workflows conversationally}
+          \resumeItem{Cut monthly finance review to \textbf{under 60 seconds} with a custom \textbf{Python} \textbf{MCP} server turning voice, image, and text commands into live \textbf{Notion} operations}
+          \resumeItem{Replaced a suite of financial tools -- expense logging, budgeting, paycheck splitting -- with one AI-native interface handling \textbf{100\%} of workflows conversationally}
         \resumeItemListEnd
 
     \resumeSubHeadingListEnd
@@ -191,7 +185,7 @@
       {Google Developer Groups}{January 2024 -- Present}
       {Vice President of Operations}{El Paso, TX}
       \resumeItemListStart
-        \resumeItem{Grew CS department event attendance \textbf{30\%} by leading a \textbf{10-person} team across \textbf{20+} events, owning budgeting, logistics, and task delegation}
+        \resumeItem{Grew CS department event attendance \textbf{30\%} leading a \textbf{10-person} team across \textbf{20+} events, owning budgeting, logistics, and delegation}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd
