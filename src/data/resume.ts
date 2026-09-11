@@ -25,7 +25,7 @@ export const profile = {
   roles: ["Software Engineer", "Developer", "Pianist"],
   tagline: "Concert pianist by day, full-stack engineer by night.",
   blurb:
-    "I build tools that collapse feedback loops — from a C++ CLI that turns a week of Office fleet telemetry into seconds, to an MCP server that runs my finances in plain English.",
+    "I love building things that give people their time back — lately that's been making Office updates ship faster at Microsoft, and teaching an AI assistant to run my budget so I don't have to. Always up for a good problem, or a good conversation.",
   location: "El Paso, TX",
   email: "guillermojiga10@gmail.com",
   phone: "+1 (915) 801-8073",
