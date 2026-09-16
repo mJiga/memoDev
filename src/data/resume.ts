@@ -106,7 +106,7 @@ export const experience: Company[] = [
       {
         title: "Software Engineering Intern",
         team: "Border economic research",
-        period: "Sep 2025 – May 2026",
+        period: "Sep 2024 – May 2026",
         summary:
           "Architected and led a 3-person team building HIBRED, a data platform putting border economic indicators in front of policymakers.",
         highlights: [
